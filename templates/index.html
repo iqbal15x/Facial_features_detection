@@ -1,14 +1,62 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>Facial Features Detection</title>
+    <meta charset="UTF-8">
+    <title>Face Shape Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            margin: 0;
+            padding: 20px;
+            color: #ffd700;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #333;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            text-align: center;
+        }
+        h1 {
+            color: #ffd700;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 5px solid #ffd700;
+            border-radius: 8px;
+        }
+        .recommendations {
+            text-align: left;
+            margin-top: 20px;
+        }
+        a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <h1>Upload an Image for Facial Features Detection</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <input type="submit" value="Upload">
-    </form>
+    <div class="container">
+        <h1>Face Shape Prediction Result</h1>
+        <p>Predicted Face Shape: {{ prediction }}</p>
+        <img src="{{ image_path }}" alt="Uploaded Image">
+        <div class="recommendations">
+            <h2>Glasses Recommendations:</h2>
+            <ul>
+                {% for rec in recommendations %}
+                    <li>{{ rec }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <br>
+        <a href="/">Go Back</a>
+    </div>
 </body>
 </html>
