@@ -1,0 +1,66 @@
+import os
+import tensorflow as tf
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.applications import VGG16
+from tensorflow.keras import layers, models
+
+# Setup data generators
+train_datagen = ImageDataGenerator(
+    rescale=1./255,
+    rotation_range=40,
+    width_shift_range=0.2,
+    height_shift_range=0.2,
+    shear_range=0.2,
+    zoom_range=0.2,
+    horizontal_flip=True,
+    fill_mode='nearest'
+)
+
+valid_datagen = ImageDataGenerator(rescale=1./255)
+
+train_generator = train_datagen.flow_from_directory(
+    'dataset/training_set',
+    target_size=(150, 150),
+    batch_size=32,
+    class_mode='categorical'
+)
+
+validation_generator = valid_datagen.flow_from_directory(
+    'dataset/testing_set',
+    target_size=(150, 150),
+    batch_size=32,
+    class_mode='categorical'
+)
+
+# Load the VGG16 model
+conv_base = VGG16(weights='imagenet', include_top=False, input_shape=(150, 150, 3))
+
+# Freeze the convolutional base
+conv_base.trainable = False
+
+model = models.Sequential([
+    conv_base,
+    layers.Flatten(),
+    layers.Dense(256, activation='relu'),
+    layers.Dropout(0.5),
+    layers.Dense(5, activation='softmax')  # Assuming 5 classes for 5 face shapes
+])
+
+model.compile(optimizer='adam',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+# Adjust the steps_per_epoch and validation_steps
+steps_per_epoch = len(train_generator)
+validation_steps = len(validation_generator)
+
+history = model.fit(
+    train_generator,
+    steps_per_epoch=steps_per_epoch,  # Sesuaikan berdasarkan ukuran dataset Anda
+    epochs=15,  # Sesuaikan berdasarkan preferensi Anda
+    validation_data=validation_generator,
+    validation_steps=validation_steps  # Sesuaikan berdasarkan ukuran dataset Anda
+)
+
+# Save the model
+model.save('model/facial_features_model.h5')
