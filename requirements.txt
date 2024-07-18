@@ -1,0 +1,7 @@
+Flask==2.0.3
+flask-ngrok==0.0.25
+tensorflow==2.5.0
+opencv-python==4.5.3.56
+numpy==1.19.5
+matplotlib==3.4.2
+textblob==0.15.3
