@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<<<<<<< HEAD
+    <title>Face Shape Prediction Result</title>
+=======
+    <title>Face Shape Detector</title>
+>>>>>>> 051c7e7 (Commit local changes before pull)
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            margin: 0;
+            padding: 20px;
+            color: #ffd700;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #333;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 8px;
+            text-align: center;
+        }
+        h1 {
+            color: #ffd700;
+        }
+<<<<<<< HEAD
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 5px solid #ffd700;
+            border-radius: 8px;
+        }
+        .recommendations {
+            text-align: left;
+            margin-top: 20px;
+        }
+        a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+=======
+        form {
+            margin-top: 20px;
+        }
+        input[type="file"] {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            color: #333;
+            background-color: #ffd700;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #ffd700;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #ffbf00;
+>>>>>>> 051c7e7 (Commit local changes before pull)
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+<<<<<<< HEAD
+        <h1>Face Shape Prediction Result</h1>
+        <p>Predicted Face Shape: {{ prediction }}</p>
+        <img src="{{ image_path }}" alt="Uploaded Image">
+        <div class="recommendations">
+            <h2>Glasses Recommendations:</h2>
+            <ul>
+                {% for rec in recommendations %}
+                    <li>{{ rec }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <br>
+        <a href="/">Go Back</a>
+=======
+        <h1>Upload an Image</h1>
+        <form action="/predict" method="post" enctype="multipart/form-data">
+            <input type="file" name="file">
+            <input type="submit" value="Upload">
+        </form>
+>>>>>>> 051c7e7 (Commit local changes before pull)
+    </div>
+</body>
+</html>
